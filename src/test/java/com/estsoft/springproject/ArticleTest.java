@@ -10,9 +10,9 @@ public class ArticleTest {
 	public void test() {
 		Article article = new Article("제목", "내용");
 
-		// Article articleBuilder = Article.builder()
-		// 	.title()
-		// 	.content()
-		// 	.build();
+		Article articleBuilder = Article.builder()
+			.title("")
+			.content("")
+			.build();
 	}
 }

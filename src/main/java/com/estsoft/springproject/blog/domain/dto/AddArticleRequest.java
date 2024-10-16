@@ -1,6 +1,6 @@
-package com.estsoft.springproject.blog.domain;
+package com.estsoft.springproject.blog.domain.dto;
 
-import org.hibernate.dialect.function.array.ArrayToStringFunction;
+import com.estsoft.springproject.blog.domain.Article;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
