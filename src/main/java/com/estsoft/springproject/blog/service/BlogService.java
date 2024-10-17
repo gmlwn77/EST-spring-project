@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.estsoft.springproject.blog.domain.Content;
 import com.estsoft.springproject.blog.domain.dto.AddArticleRequest;
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.dto.ArticleResponse;
@@ -27,6 +28,10 @@ public class BlogService {
 		return repository.save(request.toEntity());
 	}
 
+	public Article saveExternal(Content content){
+		return repository.save(content.toA());
+	}
+
 	// blog 게시글 전체 조회
 	public List<Article> findAll() {
 		return repository.findAll();
@@ -34,7 +39,7 @@ public class BlogService {
 
 	// blog 게시글 단건 조회 id 기준
 	public Article findBy(Long id){
-		// Optional - findById
+		//Optional - findById
 		//return repository.findById(id).orElse(new Article());
 		//return repository.findById(id).orElseGet(Article::new);
 		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found id: "+ id));

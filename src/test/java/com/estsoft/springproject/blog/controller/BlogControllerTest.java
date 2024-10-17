@@ -64,7 +64,7 @@ class BlogControllerTest {
 		String json = objectMapper.writeValueAsString(request);
 
 		// when: POST /articles API 호출
-		ResultActions resultActions = mockMvc.perform(post("/articles")
+		ResultActions resultActions = mockMvc.perform(post("/api")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(json));
 
@@ -83,7 +83,7 @@ class BlogControllerTest {
 		Article article = repository.save(new Article("title","content"));
 
 		// when: 조회 API
-		ResultActions resultActions = mockMvc.perform(get("/articles")
+		ResultActions resultActions = mockMvc.perform(get("/api")
 			.accept(MediaType.APPLICATION_JSON));
 
 		// then: 호출 결과 검증
@@ -100,7 +100,7 @@ class BlogControllerTest {
 		Long id = article.getId();
 
 		// when
-		ResultActions resultActions = mockMvc.perform(get("/articles/{id}", id)
+		ResultActions resultActions = mockMvc.perform(get("/api/{id}", id)
 			.accept(MediaType.APPLICATION_JSON));
 
 		// then
@@ -117,7 +117,7 @@ class BlogControllerTest {
 		Long id = article.getId();
 
 		// when
-		ResultActions resultActions = mockMvc.perform(delete("/articles/{id}", id));
+		ResultActions resultActions = mockMvc.perform(delete("/api/{id}", id));
 
 		// then
 		resultActions.andExpect(status().isOk());
@@ -128,7 +128,7 @@ class BlogControllerTest {
 	// 단건 조회 API - id에 해당하는 자원 없을 경우 4XX 예외처리 검증
 	@Test
 	public void findOneException() throws Exception {
-		ResultActions resultActions = mockMvc.perform(get("/articles/{id}", 1L)
+		ResultActions resultActions = mockMvc.perform(get("/api/{id}", 1L)
 			.accept(MediaType.APPLICATION_JSON));
 		resultActions.andExpect(status().isBadRequest());
 
@@ -146,7 +146,7 @@ class BlogControllerTest {
 		// 수정 데이터(object) -> json
 		UpdateArticleRequest request = new UpdateArticleRequest("after title", "after content");
 		String updateJson = objectMapper.writeValueAsString(request);
-		ResultActions resultActions = mockMvc.perform(put("/articles/{id}", id)
+		ResultActions resultActions = mockMvc.perform(put("/api/{id}", id)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(updateJson));
 
@@ -163,7 +163,7 @@ class BlogControllerTest {
 		String updateJson = objectMapper.writeValueAsString(request);
 		Long id = 100L;
 
-		ResultActions resultActions = mockMvc.perform(put("/articles/{id}", id)
+		ResultActions resultActions = mockMvc.perform(put("/api/{id}", id)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(updateJson));
 		resultActions.andExpect(status().isBadRequest());

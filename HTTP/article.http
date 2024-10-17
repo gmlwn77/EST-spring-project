@@ -1,5 +1,5 @@
 ### GET request to example server
-POST http://localhost:8080/articles
+POST http://localhost:8080/api/articles
 Content-Type: application/json
 
 {
@@ -8,17 +8,17 @@ Content-Type: application/json
 }
 
 ### 게시글 조회
-GET http://localhost:8080/articles
+GET http://localhost:8080/api/articles
 
 ### 게시글 단건 조회
-@id=2
-GET http://localhost:8080/articles/{{id}}
+@id=1
+GET http://localhost:8080/api/articles/{{id}}
 
 ### 게시글 삭제
-DELETE http://localhost:8080/articles/{{id}}
+DELETE http://localhost:8080/api/articles/{{id}}
 
 ### 게시글 수정
-PUT http://localhost:8080/articles/{{id}}
+PUT http://localhost:8080/api/articles/{{id}}
 Content-Type: application/json
 
 {

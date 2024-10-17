@@ -1,6 +1,5 @@
 package com.estsoft.springproject.blog.domain.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.estsoft.springproject.blog.domain.Article;
@@ -12,18 +11,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class AddArticleRequest {
-	private String content;
+@NoArgsConstructor
+// view 구성을 위한 DTO
+public class ArticleViewResponse {
+	private Long id;
 	private String title;
+	private String content;
 	private LocalDateTime createdAt;
 
-	public Article toEntity() {
-		return Article.builder()
-			.title(this.title)
-			.content(this.content)
-			.createdAt(this.createdAt)
-			.build();
+	public ArticleViewResponse(Article article){
+		this.id = article.getId();
+		this.title = article.getTitle();
+		this.content = article.getContent();
+		this.createdAt = article.getCreatedAt();
 	}
 }

@@ -37,7 +37,7 @@ public class BlogController {
 
 	// RequestMapping (특정 url   POST /articles)
 	// 입력
-	@PostMapping("/articles")
+	@PostMapping("/api/articles")
 	public ResponseEntity<ArticleResponse> writeArticle(@RequestBody AddArticleRequest request) {
 		//System.out.println(request.getTitle());
 		//System.out.println(request.getContent());
@@ -55,7 +55,7 @@ public class BlogController {
 
 	// RequestMapping
 	// 조회
-	@GetMapping("/articles")
+	@GetMapping("/api/articles")
 	public ResponseEntity<List<ArticleResponse>> findAll() {
 		// Article -> List<ArticlesResponse>
 		List<ArticleResponse> articleResponses = service.findAll().stream()
@@ -64,7 +64,7 @@ public class BlogController {
 		return ResponseEntity.ok(articleResponses);
 	}
 
-	@GetMapping("/articles/{id}")
+	@GetMapping("/api/articles/{id}")
 	public ResponseEntity<ArticleResponse> findById(@PathVariable Long id){
 		Article article = service.findBy(id);
 		// Article -> ArticleResponse
@@ -72,14 +72,14 @@ public class BlogController {
 	}
 
 	// 게시물 삭제
-	@DeleteMapping("/articles/{id}")
+	@DeleteMapping("/api/articles/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable Long id){
 		service.deleteBy(id);
 		return ResponseEntity.ok().build();
 	}
 
 	// article/{id} 수정 API body
-	@PutMapping("/articles/{id}")
+	@PutMapping("/api/articles/{id}")
 	public ResponseEntity<ArticleResponse> updateById(@PathVariable Long id,
 														@RequestBody UpdateArticleRequest request){
 		Article updateArticle = service.update(id, request);
