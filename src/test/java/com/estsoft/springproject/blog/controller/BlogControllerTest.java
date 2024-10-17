@@ -2,6 +2,7 @@ package com.estsoft.springproject.blog.controller;
 
 import java.util.List;
 
+import static java.time.LocalDateTime.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -59,7 +60,7 @@ class BlogControllerTest {
 	@Test
 	public void addArticle() throws Exception {
 		// given: article 저장
-		AddArticleRequest request = new AddArticleRequest("제목","내용");
+		AddArticleRequest request = new AddArticleRequest("제목","내용", now());
 		// 직렬화 (object -> json)
 		String json = objectMapper.writeValueAsString(request);
 
@@ -80,7 +81,7 @@ class BlogControllerTest {
 	@Test
 	public void findAll() throws Exception {
 		// given: 조회 API 값 세팅
-		Article article = repository.save(new Article("title","content"));
+		Article article = repository.save(new Article("title","content", now()));
 
 		// when: 조회 API
 		ResultActions resultActions = mockMvc.perform(get("/api")
@@ -96,7 +97,7 @@ class BlogControllerTest {
 	@Test
 	public void findBy() throws Exception {
 		// given
-		Article article = repository.save(new Article("title1", "content1"));
+		Article article = repository.save(new Article("title1", "content1", now()));
 		Long id = article.getId();
 
 		// when
@@ -113,7 +114,7 @@ class BlogControllerTest {
 	@Test
 	public void deleteBy() throws Exception {
 		// given
-		Article article = repository.save(new Article("title2", "content2"));
+		Article article = repository.save(new Article("title2", "content2", now()));
 		Long id = article.getId();
 
 		// when
@@ -140,7 +141,7 @@ class BlogControllerTest {
 	// PUT /articles/{id} body(json content)
 	@Test
 	public void updateArticle() throws Exception {
-		Article article = repository.save(new Article("before title", "before content"));
+		Article article = repository.save(new Article("before title", "before content", now()));
 		Long id = article.getId();
 
 		// 수정 데이터(object) -> json
@@ -158,7 +159,7 @@ class BlogControllerTest {
 	// 수정 API 4XX예외처리 검증
 	@Test
 	public void updateException() throws Exception {
-		Article article = repository.save(new Article("title","content"));
+		Article article = repository.save(new Article("title","content", now()));
 		UpdateArticleRequest request = new UpdateArticleRequest("after title", "after content");
 		String updateJson = objectMapper.writeValueAsString(request);
 		Long id = 100L;
