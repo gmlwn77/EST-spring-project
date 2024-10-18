@@ -1,0 +1,2 @@
+### GET 전체 조회
+GET http://localhost:8080/books
