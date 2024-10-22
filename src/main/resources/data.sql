@@ -7,3 +7,5 @@ INSERT INTO article (title, content, created_at, updated_at) VALUES ('제목2', 
 INSERT INTO article (title, content, created_at, updated_at) VALUES ('제목3', '내용3', now(), now());
 
 INSERT INTO book (id, name, author) values ('id', 'name', 'author');
+
+-- INSERT INTO users (email, password) VALUES ('test@test.com', '1234');

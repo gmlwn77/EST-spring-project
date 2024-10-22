@@ -1,7 +1,11 @@
 package com.estsoft.springproject.blog.controller;
 
+import java.security.Principal;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.dto.ArticleViewResponse;
 import com.estsoft.springproject.blog.service.BlogService;
+import com.estsoft.springproject.user.domain.Users;
 
 // view 보내줌
 @Controller
@@ -23,6 +28,8 @@ public class BlogPageController {
 
 	@GetMapping("/articles")
 	public String showArticle(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 		List<Article> articleList = blogService.findAll();
 		List<ArticleViewResponse> list = articleList.stream().
 			map(ArticleViewResponse::new)
@@ -35,7 +42,11 @@ public class BlogPageController {
 
 	// GET /articles/id 상세페이지 리턴
 	@GetMapping("/articles/{id}")
-	public String showDetails(@PathVariable Long id, Model model) {
+	public String showDetails(@PathVariable Long id, Model model, @AuthenticationPrincipal Users users) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Users principal = (Users) authentication.getPrincipal();
+		// @AuthenticationPrincipal Users users 와 같은 의미
+
 		Article article = blogService.findBy(id);
 		ArticleViewResponse articleViewResponse = new ArticleViewResponse(article);
 		model.addAttribute("article", articleViewResponse);
