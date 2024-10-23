@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
@@ -26,7 +25,8 @@ import lombok.Setter;
 public class Article {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column
+	private long article_id;
 
 	@Column(nullable = false)
 	private String title;
@@ -50,11 +50,13 @@ public class Article {
 	}
 
 	public ArticleResponse convert() {
-		return new ArticleResponse(id, title, content, createdAt);
+		return new ArticleResponse(article_id, title, content, createdAt);
 	}
 
 	public void update(String title, String content){
 		this.title = title;
 		this.content = content;
 	}
+
+
 }

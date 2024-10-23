@@ -30,7 +30,6 @@ public class WebSecurityConfiguration {
 	@Bean
 	public WebSecurityCustomizer ignore() {
 		return webSecurity -> webSecurity.ignoring()
-			.requestMatchers(toH2Console()) // h2-console
 			.requestMatchers("/static/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html");
 	}
 
@@ -41,8 +40,9 @@ public class WebSecurityConfiguration {
 		// 3) 인증, 인가 설정
 		return httpSecurity.authorizeHttpRequests(
 				custom -> custom.requestMatchers("/login", "/signup", "/user").permitAll()
-					.requestMatchers("/articles/**").hasRole("user")
-					.anyRequest().authenticated()
+					//.requestMatchers("/articles/**").hasRole("user")
+					//.anyRequest().authenticated()
+					.anyRequest().permitAll()
 			)
 			// .requestMatchers("/login", "/signup", "/user").permitAll()
 			// .anyRequest().authenticated()

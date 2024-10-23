@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.Content;
 import com.estsoft.springproject.blog.service.BlogService;
 

@@ -1,6 +1,5 @@
 package com.estsoft.springproject.blog.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;

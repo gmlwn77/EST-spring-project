@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.estsoft.springproject.blog.domain.Comment;
 import com.estsoft.springproject.blog.domain.Content;
 import com.estsoft.springproject.blog.domain.dto.AddArticleRequest;
 import com.estsoft.springproject.blog.domain.Article;
-import com.estsoft.springproject.blog.domain.dto.ArticleResponse;
+import com.estsoft.springproject.blog.domain.dto.AddCommentRequest;
 import com.estsoft.springproject.blog.domain.dto.UpdateArticleRequest;
 import com.estsoft.springproject.blog.repository.BlogRepository;
 
@@ -17,6 +18,7 @@ import jakarta.transaction.Transactional;
 public class BlogService {
 	BlogRepository repository;
 	Article article;
+	Comment comment;
 
 	public BlogService(BlogRepository repository){
 		this.repository = repository;
@@ -25,6 +27,7 @@ public class BlogService {
 	// repository.save(Article)
 
 	public Article saveArticle(AddArticleRequest request){
+
 		return repository.save(request.toEntity());
 	}
 

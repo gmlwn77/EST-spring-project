@@ -25,3 +25,30 @@ Content-Type: application/json
   "title": "제목 수정",
   "content": "내용 수정"
 }
+
+### comment 입력
+@articleId=1
+POST http://localhost:8080/api/articles/{{articleId}}/comments
+Content-Type: application/json
+
+{
+  "body": "댓글 내용1"
+}
+
+### commnet 확인
+@commentId=6
+GET http://localhost:8080/api/comments/{{commentId}}
+
+### comment id 수정
+PUT http://localhost:8080/api/comments/{{commentId}}
+Content-Type: application/json
+
+{
+  "body": "수정 내용 1"
+}
+
+### comment id 삭제
+DELETE http://localhost:8080/api/comments/{{commentId}}
+
+### article - commnet 조회
+GET http://localhost:8080//api/articels/{{articleId}}/comments
