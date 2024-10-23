@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ### commnet 확인
-@commentId=6
+@commentId=2
 GET http://localhost:8080/api/comments/{{commentId}}
 
 ### comment id 수정

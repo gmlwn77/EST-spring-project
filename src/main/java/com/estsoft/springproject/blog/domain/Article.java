@@ -17,14 +17,16 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long article_id;
 
@@ -43,11 +45,19 @@ public class Article {
 	private LocalDateTime updatedAt;
 
 	@Builder
-	public Article(String title, String content, LocalDateTime createdAt){
+	public Article(Long article_id,String title, String content, LocalDateTime createdAt){
+		this.article_id = article_id;
 		this.title = title;
 		this.content = content;
 		this.createdAt = createdAt;
 	}
+
+	// @Builder
+	// public Article(Long article_id, String title, String content){
+	// 	this.article_id = article_id;
+	// 	this.title = title;
+	// 	this.content = content;
+	// }
 
 	public ArticleResponse convert() {
 		return new ArticleResponse(article_id, title, content, createdAt);
@@ -58,5 +68,7 @@ public class Article {
 		this.content = content;
 	}
 
-
+	public Article(Long article_id){
+		this.article_id = article_id;
+	}
 }

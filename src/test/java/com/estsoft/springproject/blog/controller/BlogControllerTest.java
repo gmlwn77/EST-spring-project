@@ -94,7 +94,7 @@ class BlogControllerTest {
 	public void findBy() throws Exception {
 		// given
 		Article article = repository.save(new Article("title1", "content1", now()));
-		Long id = article.getId();
+		Long id = article.getArticle_id();
 
 		// when
 		ResultActions resultActions = mockMvc.perform(get("/api/{id}", id)
@@ -111,7 +111,7 @@ class BlogControllerTest {
 	public void deleteBy() throws Exception {
 		// given
 		Article article = repository.save(new Article("title2", "content2", now()));
-		Long id = article.getId();
+		Long id = article.getArticle_id();
 
 		// when
 		ResultActions resultActions = mockMvc.perform(delete("/api/{id}", id));
@@ -138,7 +138,7 @@ class BlogControllerTest {
 	@Test
 	public void updateArticle() throws Exception {
 		Article article = repository.save(new Article("before title", "before content", now()));
-		Long id = article.getId();
+		Long id = article.getArticle_id();
 
 		// 수정 데이터(object) -> json
 		UpdateArticleRequest request = new UpdateArticleRequest("after title", "after content");

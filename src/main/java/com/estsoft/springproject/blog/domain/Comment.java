@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.estsoft.springproject.blog.domain.dto.CommentResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -17,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +29,7 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	//@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long comment_id;
 
 	@Column
@@ -55,4 +53,11 @@ public class Comment {
 	public void update(String body){
 		this.body = body;
 	}
+
+	public Comment(Long comment_id ,Long article_id, String body){
+		this.comment_id = comment_id;
+		this.article = new Article(article_id);
+		this.body = body;
+	}
+
 }

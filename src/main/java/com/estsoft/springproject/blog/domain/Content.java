@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Content {
+	private Long id;
 	private String title;
 	private String body;
 
@@ -18,6 +19,7 @@ public class Content {
 
 	public Article toA() {
 		return Article.builder()
+			.article_id(this.id)
 			.title(this.title)
 			.content(this.body)
 			.build();

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.estsoft.springproject.blog.domain.Article;
 import com.estsoft.springproject.blog.domain.Comment;
+import com.estsoft.springproject.blog.domain.Content;
+import com.estsoft.springproject.blog.domain.ContentCommnet;
 import com.estsoft.springproject.blog.domain.dto.AddCommentRequest;
 import com.estsoft.springproject.blog.domain.dto.ArticleCommentResponse;
 import com.estsoft.springproject.blog.domain.dto.CommentIdResponse;
@@ -71,5 +73,9 @@ public class CommentService {
 			commentList.add(new CommentIdResponse(commentRepository.getById(l)));
 		}
 		return commentList;
+	}
+
+	public Comment saveExternal(ContentCommnet contentCommnet){
+		return commentRepository.save(new Comment(contentCommnet.getId(), contentCommnet.getPostId(), contentCommnet.getBody()));
 	}
 }

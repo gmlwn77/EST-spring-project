@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.estsoft.springproject.blog.domain.Comment;
 import com.estsoft.springproject.blog.domain.Content;
+import com.estsoft.springproject.blog.domain.ContentCommnet;
 import com.estsoft.springproject.blog.service.BlogService;
+import com.estsoft.springproject.blog.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,9 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ExternalApiController {
 
 	private final BlogService blogService;
+	private final CommentService commentService;
 
-	public ExternalApiController(BlogService blogService) {
+	public ExternalApiController(BlogService blogService, CommentService commentService) {
 		this.blogService = blogService;
+		this.commentService = commentService;
 	}
 
 	@GetMapping("/api/external")
@@ -46,6 +51,25 @@ public class ExternalApiController {
 		log.info("code: {}", resultList.getStatusCode());
 		log.info("{}", resultList.getBody());
 
+		return "ok";
+	}
+
+	@GetMapping("/api/external-comment")
+	public String callApi2(){
+		RestTemplate restTemplate = new RestTemplate();
+
+		String url = "https://jsonplaceholder.typicode.com/comments";
+
+		ResponseEntity<List<ContentCommnet>> resultList = restTemplate.exchange(url,
+			HttpMethod.GET,
+			null,
+			new ParameterizedTypeReference<List<ContentCommnet>>() {
+			});
+
+		List<ContentCommnet> contentCommnetList = resultList.getBody();
+		for(ContentCommnet m : contentCommnetList){
+			commentService.saveExternal(m);
+		}
 		return "ok";
 	}
 }
