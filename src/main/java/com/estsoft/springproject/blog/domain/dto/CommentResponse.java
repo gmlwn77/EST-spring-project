@@ -1,5 +1,7 @@
 package com.estsoft.springproject.blog.domain.dto;
 
+import static com.estsoft.springproject.blog.DateFormatUtil.*;
+
 import java.time.LocalDateTime;
 
 import com.estsoft.springproject.blog.domain.Comment;
@@ -14,13 +16,13 @@ import lombok.Setter;
 public class CommentResponse {
 	private Long comment_id;
 	private String body;
-	private LocalDateTime created_at;
+	private String created_at;
 	private ArticleResponse article;
 
 	public CommentResponse(Comment comment){
 		comment_id = comment.getComment_id();
 		body = comment.getBody();
-		created_at = comment.getCreated_at();
+		created_at = comment.getCreated_at().format(formatter);
 		article = new ArticleResponse(comment.getArticle());
 	}
 
