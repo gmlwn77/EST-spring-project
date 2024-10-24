@@ -51,4 +51,4 @@ Content-Type: application/json
 DELETE http://localhost:8080/api/comments/{{commentId}}
 
 ### article - commnet 조회
-GET http://localhost:8080//api/articels/{{articleId}}/comments
+GET http://localhost:8080/api/articels/{{articleId}}/comments
