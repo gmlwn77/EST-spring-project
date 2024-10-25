@@ -77,7 +77,7 @@ class BlogControllerTest {
 	@Test
 	public void findAll() throws Exception {
 		// given: 조회 API 값 세팅
-		Article article = repository.save(new Article("title","content", now()));
+		Article article = repository.save(new Article(1L,"title","content", now()));
 
 		// when: 조회 API
 		ResultActions resultActions = mockMvc.perform(get("/api")
@@ -93,7 +93,7 @@ class BlogControllerTest {
 	@Test
 	public void findBy() throws Exception {
 		// given
-		Article article = repository.save(new Article("title1", "content1", now()));
+		Article article = repository.save(new Article(1L,"title1", "content1", now()));
 		Long id = article.getArticle_id();
 
 		// when
@@ -110,7 +110,7 @@ class BlogControllerTest {
 	@Test
 	public void deleteBy() throws Exception {
 		// given
-		Article article = repository.save(new Article("title2", "content2", now()));
+		Article article = repository.save(new Article(1L,"title2", "content2", now()));
 		Long id = article.getArticle_id();
 
 		// when
@@ -137,7 +137,7 @@ class BlogControllerTest {
 	// PUT /articles/{id} body(json content)
 	@Test
 	public void updateArticle() throws Exception {
-		Article article = repository.save(new Article("before title", "before content", now()));
+		Article article = repository.save(new Article(1L,"before title", "before content", now()));
 		Long id = article.getArticle_id();
 
 		// 수정 데이터(object) -> json
@@ -155,7 +155,7 @@ class BlogControllerTest {
 	// 수정 API 4XX예외처리 검증
 	@Test
 	public void updateException() throws Exception {
-		Article article = repository.save(new Article("title","content", now()));
+		Article article = repository.save(new Article(1L,"title","content", now()));
 		UpdateArticleRequest request = new UpdateArticleRequest("after title", "after content");
 		String updateJson = objectMapper.writeValueAsString(request);
 		Long id = 100L;
