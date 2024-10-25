@@ -10,7 +10,7 @@ public class ArticleTest {
 
 	@Test
 	public void test() {
-		Article article = new Article("제목", "내용", now());
+		Article article = new Article(1L, "제목", "내용", now());
 
 		Article articleBuilder = Article.builder()
 			.title("")
