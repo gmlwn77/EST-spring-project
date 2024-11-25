@@ -29,11 +29,6 @@ public class Users implements UserDetails {
 	@Column(nullable = false)
 	private String password;
 
-	// public Users(String email, String password){
-	// 	this.email=email;
-	// 	this.password = password;
-	// }
-
 	@Builder
 	public Users(String email, String password) {
 		this.email = email;

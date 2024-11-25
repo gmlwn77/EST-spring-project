@@ -23,6 +23,7 @@ public class BookController {
 			.stream()
 			.map(BookDTO::new)
 			.toList();
+		model.addAttribute("bookList", bookList);
 
 		return "bookManagement";
 	}

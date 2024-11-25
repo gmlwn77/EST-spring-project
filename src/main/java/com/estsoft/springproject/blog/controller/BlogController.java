@@ -54,7 +54,7 @@ public class BlogController {
 
 		Article article = service.saveArticle(request);
 		return ResponseEntity.status(HttpStatus.CREATED)
-			.body(article.convert());
+			.body(new ArticleResponse(article));
 	}
 
 	// RequestMapping
@@ -80,7 +80,7 @@ public class BlogController {
 	public ResponseEntity<ArticleResponse> findById(@PathVariable Long id){
 		Article article = service.findBy(id);
 		// Article -> ArticleResponse
-		return ResponseEntity.ok(article.convert());
+		return ResponseEntity.ok(new ArticleResponse(article));
 	}
 
 	// 게시물 삭제

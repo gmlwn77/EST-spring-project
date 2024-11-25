@@ -30,7 +30,7 @@ public class WebSecurityConfiguration {
 	@Bean
 	public WebSecurityCustomizer ignore() {
 		return webSecurity -> webSecurity.ignoring()
-			.requestMatchers("/static/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html");
+			.requestMatchers("/static/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/h2-console/**");
 	}
 
 	// 2) 특정 HTTP 요청에 대한 웹 기반 보안 구성

@@ -26,9 +26,9 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private long article_id;
+	private Long article_id;
 
 	@Column(nullable = false)
 	private String title;
@@ -50,6 +50,12 @@ public class Article {
 		this.title = title;
 		this.content = content;
 		this.createdAt = createdAt;
+	}
+
+	@Builder
+	public Article(String title, String content){
+		this.title = title;
+		this.content = content;
 	}
 
 	// @Builder

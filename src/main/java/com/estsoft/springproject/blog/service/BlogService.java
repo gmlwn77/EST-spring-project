@@ -26,6 +26,7 @@ public class BlogService {
 	// blog 게시글 저장
 	// repository.save(Article)
 
+	@Transactional
 	public Article saveArticle(AddArticleRequest request){
 
 		return repository.save(request.toEntity());

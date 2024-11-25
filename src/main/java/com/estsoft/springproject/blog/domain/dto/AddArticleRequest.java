@@ -14,15 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddArticleRequest {
-	private String content;
 	private String title;
-	private LocalDateTime createdAt;
+	private String content;
 
 	public Article toEntity() {
 		return Article.builder()
 			.title(this.title)
 			.content(this.content)
-			.createdAt(this.createdAt)
 			.build();
 	}
 }
